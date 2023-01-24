@@ -74,7 +74,7 @@ function App() {
       fee = parseInt(feeIncrement) * daysDiff
     }
     let total = ethers.BigNumber.from(parseInt(precio) + fee)
-    await contract.pagarRenta(id, {value: total}).then(alert("Pago mandado a Metamask, recarge la pagina cuando la transaccion haya sido confirmada."))
+    await contract.pagarRenta(id-1, {value: total}).then(alert("Pago mandado a Metamask, recarge la pagina cuando la transaccion haya sido confirmada."))
   }
   useEffect(() => {
     window.ethereum &&
