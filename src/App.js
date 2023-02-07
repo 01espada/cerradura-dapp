@@ -66,19 +66,19 @@ function App() {
         return setNetwork("Unknown");
       }
   }
-  const pagar = async (precio, nextPayment, feeIncrement, id) => {
-    const fee = 0
-    const today = new Date()
-    if (nextPayment > today) {
-      const daysDiff = (today - nextPayment) / 60 / 60 / 24
+  const pagar = async (precio, feeIncrement, daysDiff, id) => {
+    let fee = 0
+    if (daysDiff > 0) {
       fee = parseInt(feeIncrement) * daysDiff
     }
     let total = ethers.BigNumber.from(parseInt(precio) + fee)
+    console.log(precio + fee)
     await contract.pagarRenta(id-1, {value: total}).then(alert("Pago mandado a Metamask, recarge la pagina cuando la transaccion haya sido confirmada."))
   }
   useEffect(() => {
     window.ethereum &&
       window.ethereum.on("chainChanged", () => connect());
+    window.ethereum &&
       window.ethereum.on("accountsChanged", () => connect());
   });
   
